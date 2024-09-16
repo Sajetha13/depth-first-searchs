@@ -53,6 +53,37 @@ Now, the Stack becomes empty, which means we have visited all the nodes, and our
  <li>Find its Successors Or neighbors and Check whether the node is visited or not</li>
  <li>If Not Visited, add it to the STACK. Else Call The Function Again Until No more nodes needs to be visited.</li>
 </ol></B>
+<hr>
+<h3>Program</h3>
+from collections import defaultdict
+
+def dfs(graph, start, visited, path):
+    path.append(start)
+    visited[start] = True
+    for neighbour in graph[start]:
+        if not visited[neighbour]:
+            dfs(graph, neighbour,
+                visited, path)
+    return path
+
+graph = defaultdict(list)
+n, e = map(int, input("Enter the number of nodes and edges: ").split())
+
+for i in range(e):
+    u, v = input(f"Enter edge {i+1} (u v): ").split()
+    graph[u].append(v)
+    graph[v].append(u)  # If the graph is undirected; remove this line for a directed graph
+
+if '0' in graph:
+    start = '0'
+else:
+    start = 'A'
+# Starting node
+visited = defaultdict(bool)
+path = []
+
+traversed_path = dfs(graph, start, visited, path)
+print("DFS Traversal Path:", traversed_path)
 
 <hr>
 <h3>Sample Input</h3>
@@ -73,6 +104,10 @@ F H <BR>
 ['A', 'B', 'E', 'D', 'C', 'G', 'F', 'H']
 
 <hr>
+<h4>Input/Output Screenshot</h4>
+<hr>
+![image](https://github.com/user-attachments/assets/fbfa1ef3-9b93-4a14-b418-29686081a9ca)
+
 
 <hr>
 <h3>Sample Input</h3>
@@ -87,6 +122,10 @@ F H <BR>
 <h3>Sample Output</h3>
 <hr>
 ['0', '1', '2', '3', '4']
+<hr>
+<h4>Input/Output Screenshot</h4>
+<hr>
+![image](https://github.com/user-attachments/assets/11d1ba4b-12f7-497b-b7cf-412e8d7aa88f)
 
 <hr>
 <h3>Result:</h3>
